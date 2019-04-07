@@ -14,24 +14,20 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Interface {
-	Stage window;
+	private final Stage window;
+	private Scene userAccountScene, newUserAccountScene;
 
-	Scene userAccountScene, newUserAccountScene;
-
-	public Interface() {
-		
-	}
-	public void initialiseInterface (Stage primaryStage) {
+	Interface(Stage primaryStage) {
 		window = primaryStage;
 		window.setTitle("Music Player");
 		// 1: user account scene
 		newUserAccountScene = createNewUserAccountScene();
 		userAccountScene = createUserAccountScene();
-        primaryStage.setScene(userAccountScene);
-        primaryStage.show();
+		window.setScene(userAccountScene);
+		window.show();
 	}
-	public Scene createUserAccountScene() {
-		ListView<String> userAccounts = new ListView<String>();
+	private Scene createUserAccountScene() {
+		ListView<String> userAccounts = new ListView<>();
 		// TODO: load users from database file
 		ObservableList<String> users = FXCollections.observableArrayList (
 			    "James", "Alex", "Tony", "Brandon");
@@ -48,7 +44,7 @@ public class Interface {
 		userAccountLayout.getChildren().addAll(new Label("Users: "), userAccounts, loadUser, newUser);
 		return new Scene(userAccountLayout, 200, 200);
 	}
-	public Scene createNewUserAccountScene() {
+	private Scene createNewUserAccountScene() {
 		//Creating a GridPane container
 		GridPane newAccLayout = new GridPane();
 		
