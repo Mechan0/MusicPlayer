@@ -3,15 +3,15 @@ package com.mechan0.git.musicPlayer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
+ * Represents a database of all songs, from which users can read entries.
  * Reads all files from songs.csv and loads them into Song objects
  * @author James
  *
  */
 public class SongDatabase {
-	ArrayList<Song> songs;
+	private ArrayList<Song> songs;
 	public SongDatabase() {
 		songs = new ArrayList<Song>();
 		generateDatabase();
@@ -39,5 +39,8 @@ public class SongDatabase {
 			e.printStackTrace();
 			return new Song(-1, "ERROR", "ERROR", "ERROR", -1, -1, "ERROR", "ERROR");
 		}
+	}
+	public Song getSong(int songID) {
+		return songs.get(songID);
 	}
 }

@@ -1,5 +1,11 @@
 package com.mechan0.git.musicPlayer;
 
+/**
+ * Represents a single song within the system and stores it's attributes
+ * Implements Comparable 
+ * 
+ *
+ */
 public class Song implements Comparable<Song> {
 	int id, songNumber, year;
 	String title, artist, album, genre, length;
