@@ -1,5 +1,6 @@
 package com.mechan0.git.musicPlayer;
 
+import java.util.ArrayList;
 import java.util.HashMap; 
 
 /**
@@ -14,5 +15,13 @@ public class AccountDatabase {
 	}
 	public void addUser(String userName) {
 		userAccounts.put(userName, new Account());
+	}
+	public ArrayList<String> getNames() {
+		ArrayList<String> namesList = new ArrayList<String>();
+		namesList.addAll(userAccounts.keySet());
+		return namesList;
+	}
+	public  Account getAccount(String userName) {
+		return userAccounts.get(userName);
 	}
 }
