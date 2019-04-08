@@ -1,4 +1,4 @@
-package com.mechan0.git.musicPlayer;
+package musicPlayer;
 
 import java.util.ArrayList;
 import java.util.HashMap; 

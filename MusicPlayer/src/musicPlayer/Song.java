@@ -1,4 +1,4 @@
-package com.mechan0.git.musicPlayer;
+package musicPlayer;
 
 /**
  * Represents a single song within the system and stores it's attributes

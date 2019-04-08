@@ -1,4 +1,4 @@
-package com.mechan0.git.musicPlayer;
+package musicPlayer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
