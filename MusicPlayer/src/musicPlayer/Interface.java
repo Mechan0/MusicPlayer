@@ -46,7 +46,7 @@ public class Interface {
 		userAccounts.setItems(users);
 		VBox userAccountLayout = new VBox(20);
 		userAccountLayout.getChildren().addAll(new Label("Users: "), userAccounts, loadUser, newUser);
-		return new Scene(userAccountLayout, 200, 200);
+		return new Scene(userAccountLayout, 400, 400);
 	}
 	private Scene createNewUserAccountScene() {
 		//Creating a GridPane container
