@@ -38,6 +38,7 @@ public class Interface {
 		Button loadUser = new Button("Login as user");
 		loadUser.setOnAction(e -> {
 			//TODO: Retrieve text box value account and load corresponding panel
+			userAccounts.getSelectionModel().getSelectedItem();
 		});
 		userAccounts.setItems(users);
 		VBox userAccountLayout = new VBox(20);
@@ -47,14 +48,11 @@ public class Interface {
 	private Scene createNewUserAccountScene() {
 		//Creating a GridPane container
 		GridPane newAccLayout = new GridPane();
-		
 		newAccLayout.setPadding(new Insets(10, 10, 10, 10));
 		newAccLayout.setVgap(5);
 		newAccLayout.setHgap(5);
 		// Defining header label
-		Label headLabel = new Label("Username:");
-		//GridPane.setConstraints(headLabel, 1, 0);
-		newAccLayout.getChildren().add(new Label("Username"));
+		newAccLayout.getChildren().add(new Label("Username:"));
 		//Defining the userName text field
 		final TextField userName = new TextField();
 		userName.setPromptText("Enter your userName.");

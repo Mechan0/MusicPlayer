@@ -7,6 +7,7 @@ public class MusicPlayer extends Application {
 	private double width = 200, height = 300; // default dimensions
 
 	public static void main(String[] args) {
+		SongDatabase sd = new SongDatabase();
 		launch(args);
 	}
 
