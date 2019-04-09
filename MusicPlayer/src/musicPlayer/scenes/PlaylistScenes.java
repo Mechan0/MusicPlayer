@@ -4,16 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import musicPlayer.MusicPlayer;
-import musicPlayer.Playlist;
+import javafx.util.Callback;
+import musicPlayer.*;
 
 public class PlaylistScenes {
 	public static void createPlaylistDialog() {
@@ -59,9 +57,9 @@ public class PlaylistScenes {
 		gridPane.setVgap(10);
 		gridPane.add(MusicPlayer.createTitle("Playlists"), 0, 0, 3, 1);
 
-		ListView<String> listView = new ListView<>();
-		ObservableList<String> playlists = FXCollections.observableArrayList();
-		MusicPlayer.getActiveAccount().getPlaylists().forEach(playlist -> playlists.add(playlist.getTitle()));
+		ListView<Playlist> listView = new ListView<>();
+		ObservableList<Playlist> playlists = FXCollections.observableArrayList();
+		playlists.addAll(MusicPlayer.getActiveAccount().getPlaylists());
 		listView.setItems(playlists);
 
 		gridPane.add(listView, 0, 1, 2, 1);
@@ -72,7 +70,7 @@ public class PlaylistScenes {
 		viewButton.setDisable(true);
 		buttonBox.getChildren().add(viewButton);
 		viewButton.setOnAction(e -> {
-			MusicPlayer.setScene(playlistScene(MusicPlayer.getActiveAccount().getPlaylist(listView.getSelectionModel().getSelectedItem())));
+			MusicPlayer.setScene(playlistScene(listView.getSelectionModel().getSelectedItem()));
 		});
 
 		Button deleteButton = new Button("Delete Playlist");
@@ -94,7 +92,7 @@ public class PlaylistScenes {
 		backButton.setOnAction(e -> MusicPlayer.setScene(MainPageScene.getScene()));
 		buttonBox.getChildren().add(backButton);
 
-		listView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<? super String>) change -> {
+		listView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<? super Playlist>) change -> {
 			change.next();
 			viewButton.setDisable(change.getTo() == 0);
 			deleteButton.setDisable(change.getTo() == 0);
@@ -106,6 +104,8 @@ public class PlaylistScenes {
 	}
 
 	public static Scene playlistScene(Playlist playlist) {
-		throw new IllegalStateException(); //TODO
+		TableView<Song> songTable = SongTableFactory.createSongTable(playlist.getSongs());
+		// TODO
+		throw new IllegalStateException();
 	}
 }

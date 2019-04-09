@@ -40,4 +40,8 @@ public class Account {
 	public boolean removePlaylist(String title) {
 		return playLists.remove(title) != null;
 	}
+
+	public boolean removePlaylist(Playlist playlist) {
+		return playLists.remove(playlist.getTitle(), playlist);
+	}
 }

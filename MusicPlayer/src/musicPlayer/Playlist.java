@@ -20,6 +20,21 @@ public class Playlist {
 	}
 
 	public void addSong(Song song) {
+		if (songs.contains(song))
+			return;
 		songs.add(song);
+	}
+
+	public Queue<Song> getSongs() {
+		return songs;
+	}
+
+	public void removeSong(Song song) {
+		songs.remove(song);
+	}
+
+	@Override
+	public String toString() {
+		return title+" ("+songs.size()+" song"+(songs.size() != 1 ? "s" : "")+")";
 	}
 }

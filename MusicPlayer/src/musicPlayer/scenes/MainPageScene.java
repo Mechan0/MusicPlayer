@@ -20,6 +20,7 @@ public class MainPageScene {
 		BorderPane mainLayout = new BorderPane();
 		//VBox centerContent = new VBox();
 		TableView<Song> songTable = SongTableFactory.createSongTable(SongDatabase.getSongs());
+		songTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); // allow multiple selection
 		//centerContent.getChildren().add(songTable);
 		MenuBar menuBar = new MenuBar();
 		menuBar.getMenus().addAll(createFilterMenu(songTable));
@@ -45,6 +46,7 @@ public class MainPageScene {
 			MenuItem playlistButton = new MenuItem(playlist.getTitle());
 			playlistButton.setOnAction(e -> {
 				songTable.getSelectionModel().getSelectedItems().forEach(playlist::addSong);
+				songTable.getSelectionModel().clearSelection();
 			});
 			addToPlaylistButton.getItems().add(playlistButton);
 		}
