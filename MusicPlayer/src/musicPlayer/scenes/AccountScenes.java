@@ -44,11 +44,11 @@ public class AccountScenes {
         //Creating a GridPane container
         GridPane newAccLayout = new GridPane();
         newAccLayout.setPadding(MusicPlayer.DEFAULT_PADDING);
-        newAccLayout.setVgap(5);
-        newAccLayout.setHgap(5);
+        newAccLayout.setVgap(10);
+        newAccLayout.setHgap(10);
 
         // Defining header label
-        newAccLayout.getChildren().add(new Label("Create New User:"));
+        newAccLayout.getChildren().add(MusicPlayer.createTitle("Create New User"));
 
         //Defining the userName text field
         final TextField userName = new TextField();
@@ -67,6 +67,10 @@ public class AccountScenes {
 
         //Defining the Submit button
         Button submit = new Button("Submit");
+        submit.setDisable(true);
+        userName.textProperty().addListener((observable, oldValue, newValue) -> {
+            submit.setDisable(newValue.isEmpty());
+        });
         submit.setOnAction(e -> {
             AccountDatabase.addUser(userName.getText(), adminCheckbox.isSelected());
             userName.clear();
@@ -84,6 +88,6 @@ public class AccountScenes {
         GridPane.setConstraints(buttonLayout, 0, 2);
         newAccLayout.getChildren().addAll(buttonLayout);
 
-        return new Scene(newAccLayout, 300, 100);
+        return new Scene(newAccLayout);
     }
 }
