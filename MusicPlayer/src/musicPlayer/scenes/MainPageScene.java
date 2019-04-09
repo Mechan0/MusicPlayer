@@ -33,7 +33,10 @@ public class MainPageScene {
 		statusbar.getChildren().add(playlistsButton);
 
 		Button createPlaylistButton = new Button("Create New Playlist");
-		createPlaylistButton.setOnAction(e -> MusicPlayer.setScene(PlaylistScenes.createPlaylist(MainPageScene::getScene)));
+		createPlaylistButton.setOnAction(e -> {
+			PlaylistScenes.createPlaylistDialog();
+			MusicPlayer.setScene(getScene());
+		});
 		statusbar.getChildren().add(createPlaylistButton);
 
 		MenuButton addToPlaylistButton = new MenuButton("Add to Playlist");
