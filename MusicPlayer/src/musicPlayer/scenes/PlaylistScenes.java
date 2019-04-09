@@ -5,7 +5,6 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -14,8 +13,10 @@ import javafx.scene.layout.VBox;
 import musicPlayer.MusicPlayer;
 import musicPlayer.Playlist;
 
+import java.util.function.Supplier;
+
 public class PlaylistScenes {
-	public static Scene createPlaylist() {
+	public static Scene createPlaylist(Supplier<Scene> returnScene) {
 		VBox layout = new VBox();
 		layout.setSpacing(10);
 		layout.setPadding(MusicPlayer.DEFAULT_PADDING);
@@ -34,9 +35,9 @@ public class PlaylistScenes {
 		});
 		createButton.setOnAction(e -> {
 			MusicPlayer.getActiveAccount().createPlayList(input.getText());
-			MusicPlayer.setScene(MainPageScene.getScene());
+			MusicPlayer.setScene(returnScene.get());
 		});
-		cancelButton.setOnAction(e -> MusicPlayer.setScene(MainPageScene.getScene()));
+		cancelButton.setOnAction(e -> MusicPlayer.setScene(returnScene.get()));
 		buttons.getChildren().add(createButton);
 		buttons.getChildren().add(cancelButton);
 
@@ -75,6 +76,10 @@ public class PlaylistScenes {
 			MusicPlayer.getActiveAccount().removePlaylist(listView.getSelectionModel().getSelectedItem());
 			MusicPlayer.setScene(playlistsScene());
 		});
+
+		Button createButton = new Button("Create Playlist");
+		createButton.setOnAction(e -> MusicPlayer.setScene(createPlaylist(PlaylistScenes::playlistsScene)));
+		buttonBox.getChildren().add(createButton);
 
 		Button backButton = new Button("Back to Songs");
 		backButton.setOnAction(e -> MusicPlayer.setScene(MainPageScene.getScene()));

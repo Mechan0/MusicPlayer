@@ -14,6 +14,7 @@ public class AccountDatabase {
 
 	static {
 		userAccounts.put("Sample User", new Account(false));
+		userAccounts.put("Sample Admin", new Account(true));
 	}
 
 	public static void addUser(String userName, boolean admin) {
