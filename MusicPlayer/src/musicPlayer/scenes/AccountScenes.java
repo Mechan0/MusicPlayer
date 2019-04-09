@@ -38,7 +38,7 @@ public class AccountScenes {
         userAccounts.setItems(users);
         VBox userAccountLayout = new VBox(10);
         userAccountLayout.setPadding(MusicPlayer.DEFAULT_PADDING);
-        userAccountLayout.getChildren().addAll(new Label("Users: "), userAccounts, loadUser, newUser);
+        userAccountLayout.getChildren().addAll(MusicPlayer.createTitle("Select an Account"), userAccounts, loadUser, newUser);
         return new Scene(userAccountLayout, 200, 200);
     }
     public static Scene createAccount() {

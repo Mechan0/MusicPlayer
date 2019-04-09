@@ -3,8 +3,11 @@ package musicPlayer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import musicPlayer.scenes.AccountScenes;
+
 
 /**
  * @author James Williamson, Alex Yaro
@@ -48,5 +51,11 @@ public class MusicPlayer extends Application {
 
 	public static void setActiveAccount(Account account) {
 		activeAccount = account;
+	}
+
+	public static Label createTitle(String title) {
+		Label label = new Label(title);
+		label.setFont(new Font("Arial", 20));
+		return label;
 	}
 }

@@ -1,12 +1,10 @@
 package musicPlayer.scenes;
 
 import javafx.collections.ListChangeListener;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import musicPlayer.*;
 
 import java.util.ArrayList;
