@@ -14,10 +14,11 @@ import javafx.scene.control.Button;
 public class Song implements Comparable<Song> {
 	private final int id;
 	private SimpleIntegerProperty songNumber, year;
-	private SimpleStringProperty title, artist, album, genre, length;
+	private SimpleStringProperty title, artist, album, genre;
+	private final int durationSeconds;
 	private Button button;
 	
-	public Song(int id, String title, String artist, String album, int songNumber, int year, String genre, String length) {
+	public Song(int id, String title, String artist, String album, int songNumber, int year, String genre, int durationSeconds) {
 		this.id = id;
 		this.title = new SimpleStringProperty(title);
 		this.artist = new SimpleStringProperty(artist);
@@ -25,6 +26,7 @@ public class Song implements Comparable<Song> {
 		this.songNumber = new SimpleIntegerProperty(songNumber);
 		this.year = new SimpleIntegerProperty(year);
 		this.genre = new SimpleStringProperty(genre);
+		this.durationSeconds = durationSeconds;
 		this.button = new Button("Statistics");
 		button.setOnAction(e -> StatsPage.display(getStats()));
 	}
@@ -53,8 +55,22 @@ public class Song implements Comparable<Song> {
 	public String getGenre() {
 		return genre.get();
 	}
-	public String getLength() {
-		return length.get();
+	public int getDuration() {
+		return durationSeconds;
+	}
+	public String getFormattedDuration() {
+		if (durationSeconds >= 60*60) { // 1 hour
+			return String.format(
+					"%d:%02d:%02d",
+					durationSeconds / 3600,
+					(durationSeconds % 3600) / 60,
+					durationSeconds % 60);
+		} else {
+			return String.format(
+					"%d:%02d",
+					durationSeconds / 60,
+					durationSeconds % 60);
+		}
 	}
 	@Override
 	public int hashCode() {

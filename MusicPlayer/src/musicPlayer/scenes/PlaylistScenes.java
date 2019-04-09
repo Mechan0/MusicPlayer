@@ -10,8 +10,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import musicPlayer.*;
+import musicPlayer.MusicPlayer;
+import musicPlayer.Playlist;
+import musicPlayer.Song;
+import musicPlayer.SongTableFactory;
+
+import java.util.function.Supplier;
 
 public class PlaylistScenes {
 	public static void createPlaylistDialog() {
@@ -70,7 +74,7 @@ public class PlaylistScenes {
 		viewButton.setDisable(true);
 		buttonBox.getChildren().add(viewButton);
 		viewButton.setOnAction(e -> {
-			MusicPlayer.setScene(playlistScene(listView.getSelectionModel().getSelectedItem()));
+			MusicPlayer.setScene(playlistScene(listView.getSelectionModel().getSelectedItem(), PlaylistScenes::playlistsScene));
 		});
 
 		Button deleteButton = new Button("Delete Playlist");
@@ -103,9 +107,36 @@ public class PlaylistScenes {
 		return new Scene(gridPane);
 	}
 
-	public static Scene playlistScene(Playlist playlist) {
+	public static Scene playlistScene(Playlist playlist, Supplier<Scene> previousScene) {
+		VBox layout = new VBox(10);
+		layout.setPadding(MusicPlayer.DEFAULT_PADDING);
+
+		layout.getChildren().add(MusicPlayer.createTitle("Playlist: "+playlist.getTitle()));
+
 		TableView<Song> songTable = SongTableFactory.createSongTable(playlist.getSongs());
-		// TODO
-		throw new IllegalStateException();
+		songTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		layout.getChildren().add(songTable);
+
+		HBox buttonBox = new HBox(10);
+
+		Button removeButton = new Button("Remove Selected");
+		removeButton.setOnAction(e -> {
+			songTable.getSelectionModel().getSelectedItems().forEach(playlist::removeSong);
+			MusicPlayer.setScene(playlistScene(playlist, previousScene));
+		});
+
+		Button addToQueue = new Button("Add Playlist to Queue"); // TODO add to queue only if between 1-3 hrs
+		addToQueue.setDisable(true);
+
+		Button backButton = new Button("Go Back");
+		backButton.setOnAction(e -> MusicPlayer.setScene(previousScene.get()));
+
+		buttonBox.getChildren().add(removeButton);
+		buttonBox.getChildren().add(addToQueue);
+		buttonBox.getChildren().add(backButton);
+
+		layout.getChildren().add(buttonBox);
+
+		return new Scene(layout);
 	}
 }
