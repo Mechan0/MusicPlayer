@@ -1,18 +1,42 @@
 package musicPlayer;
 
+import com.sun.istack.internal.Nullable;
+
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
  * Represents a user account, storing their PlayLists and other information
  * 
- * @author James Williamson
+ * @author James Williamson, Alexander Yaroslavtsev
  */
 public class Account {
-	private HashMap<String, PlayList> playLists;
-	public Account() {
-		playLists = new HashMap<String, PlayList>();
+	private final HashMap<String, PlayList> playLists = new HashMap<>();
+	private final boolean admin;
+
+	public Account(boolean admin) {
+		this.admin = admin;
 	}
-	public void addPlayList(String title) {
-		playLists.put(title, new PlayList());
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void createPlayList(String title) {
+		playLists.put(title, new PlayList(title));
+	}
+
+	@Nullable
+	public PlayList getPlaylist(String title) {
+		return playLists.get(title);
+	}
+
+	public Collection<PlayList> getPlaylists() {
+		return Collections.unmodifiableCollection(playLists.values());
+	}
+
+	public boolean removePlaylist(String title) {
+		return playLists.remove(title) != null;
 	}
 }
