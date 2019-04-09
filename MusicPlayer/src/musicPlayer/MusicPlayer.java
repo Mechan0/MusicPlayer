@@ -11,7 +11,7 @@ import musicPlayer.scenes.AccountScenes;
  */
 public class MusicPlayer extends Application {
 	private static Stage window;
-	private double width = 200, height = 300; // default dimensions
+	private static double width = 200, height = 300; // default dimensions
 	private static Account activeAccount;
 
 	public static void main(String[] args) {

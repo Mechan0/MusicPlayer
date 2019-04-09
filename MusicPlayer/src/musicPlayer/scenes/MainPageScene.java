@@ -22,8 +22,7 @@ public class MainPageScene {
         //TODO: Flesh out main panel, add buttons to toolbar
         BorderPane mainLayout = new BorderPane();
         VBox centerContent = new VBox();
-        SongTableFactory stf = new SongTableFactory();
-        TableView<Song> songTable = stf.createSongTable(SongDatabase.getSongs());
+        TableView<Song> songTable = SongTableFactory.createSongTable(SongDatabase.getSongs());
         centerContent.getChildren().add(songTable);
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(createFilterMenu(songTable));

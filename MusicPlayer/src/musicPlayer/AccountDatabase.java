@@ -10,10 +10,11 @@ import java.util.LinkedHashMap;
  * @author James Williamson, Alexander Yaroslavtsev
  */
 public class AccountDatabase {
-	// TODO: load user accounts into map with userName as key.
 	private static final HashMap<String, Account> userAccounts = new LinkedHashMap<>(); // retain key ordering
 
-	private AccountDatabase() {}
+	static {
+		
+	}
 
 	public static void addUser(String userName, boolean admin) {
 		userAccounts.put(userName, new Account(admin));

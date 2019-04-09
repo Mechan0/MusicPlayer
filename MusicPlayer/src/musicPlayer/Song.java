@@ -10,9 +10,9 @@ import javafx.beans.property.SimpleStringProperty;
  * @author James Williamson
  */
 public class Song implements Comparable<Song> {
-	int id;
-	SimpleIntegerProperty songNumber, year;
-	SimpleStringProperty title, artist, album, genre, length;
+	private final int id;
+	private SimpleIntegerProperty songNumber, year;
+	private SimpleStringProperty title, artist, album, genre, length;
 	
 	public Song(int id, String title, String artist, String album, int songNumber, int year, String genre, String length) {
 		this.id = id;

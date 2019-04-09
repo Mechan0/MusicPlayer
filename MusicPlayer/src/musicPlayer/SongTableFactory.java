@@ -1,7 +1,6 @@
 package musicPlayer;
 
 import java.util.Collection;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -9,13 +8,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
- * Generates TableView objects with the given collection
+ * Generates TableView objects containing the given Collection of Song objects
  * @author James Williamson
  *
  */
 public class SongTableFactory {
 	@SuppressWarnings("unchecked")
-	public TableView<Song> createSongTable(Collection<Song> songs) {
+	public static TableView<Song> createSongTable(Collection<Song> songs) {
 		TableView<Song> songTable = new TableView<Song>();
 		// title
 		TableColumn<Song, String> title = new TableColumn<Song, String>("Title");

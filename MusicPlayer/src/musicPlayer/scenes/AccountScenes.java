@@ -15,7 +15,7 @@ import java.util.Comparator;
 
 /**
  * Account-related scene factory class.
- * @author Alex
+ * @author Alex Yaroslavtsev, James Williamson
  */
 public class AccountScenes {
     public static Scene selectAccount() {
