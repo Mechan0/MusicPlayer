@@ -1,5 +1,6 @@
 package musicPlayer;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
@@ -94,15 +98,76 @@ public class Interface {
 	private Scene createMainMenuScene() {
 		//TODO: Flesh out main panel, add buttons to toolbar
 		BorderPane mainLayout = new BorderPane();
-		ToolBar toolbar = new ToolBar();
 		VBox centerContent = new VBox();
-	    HBox statusbar = new HBox(); 
-	    SongTableFactory stf = new SongTableFactory();
+		SongTableFactory stf = new SongTableFactory();
 	    TableView<Song> songTable = stf.createSongTable(songDatabase.songs);
 	    centerContent.getChildren().add(songTable);
-	    mainLayout.setTop(toolbar);
+		MenuBar menuBar = new MenuBar();
+		menuBar.getMenus().addAll(createFilterMenu(songTable));
+	    HBox statusbar = new HBox();
+	    
+	    mainLayout.setTop(menuBar);
 	    mainLayout.setCenter(centerContent);
 	    mainLayout.setBottom(statusbar);
 	    return new Scene(mainLayout);
+	}
+	private Menu createFilterMenu(TableView<Song> songTable) {
+		// TODO: Refactor to more elegant solution
+		Menu filterMenu = new Menu("Filter Songs");
+		// artist filter
+		Menu artistFilter = createSubFilterMenu("Artist", songDatabase.getArtists());
+		for (MenuItem item : artistFilter.getItems()) {
+			item.setOnAction(e -> {
+				songTable.getItems().removeAll(songTable.getItems());
+				songTable.getItems().addAll(songDatabase.getSongsArtist(item.getText()));
+			});
+		}
+		// albumFilter
+		Menu albumFilter = createSubFilterMenu("Album", songDatabase.getAlbums());
+		for (MenuItem item : albumFilter.getItems()) {
+			item.setOnAction(e -> {
+				songTable.getItems().removeAll(songTable.getItems());
+				songTable.getItems().addAll(songDatabase.getSongsAlbum(item.getText()));
+			});
+		}
+		// yearFilter
+		Menu yearFilter = createSubFilterMenuInt("Year", songDatabase.getYears());
+		for (MenuItem item : yearFilter.getItems()) {
+			item.setOnAction(e -> {
+				songTable.getItems().removeAll(songTable.getItems());
+				songTable.getItems().addAll(songDatabase.getSongsYear(Integer.parseInt(item.getText())));
+			});
+		}
+		// genreFilter
+		Menu genreFilter = createSubFilterMenu("Genre", songDatabase.getGenres());
+		for (MenuItem item : genreFilter.getItems()) {
+			item.setOnAction(e -> {
+				songTable.getItems().removeAll(songTable.getItems());
+				songTable.getItems().addAll(songDatabase.getSongsGenre(item.getText()));
+			});
+		}
+		MenuItem noFilter = new MenuItem("All Songs");
+		noFilter.setOnAction(e -> {
+			songTable.getItems().removeAll(songTable.getItems());
+			songTable.getItems().addAll(songDatabase.songs);
+		});
+		filterMenu.getItems().addAll(artistFilter, albumFilter, yearFilter, genreFilter, noFilter);
+		return filterMenu;
+	}
+	private Menu createSubFilterMenu(String title, ArrayList<String> items) {
+		Menu subFilter = new Menu(title);
+		ArrayList<String> subFilterItems = items;
+		for(String subFilterItem : subFilterItems) {
+			subFilter.getItems().add(new MenuItem(subFilterItem));
+		}
+		return subFilter;
+	}
+	private Menu createSubFilterMenuInt(String title, ArrayList<Integer> items) {
+		Menu subFilter = new Menu(title);
+		ArrayList<Integer> subFilterItems = items;
+		for(Integer subFilterItem : subFilterItems) {
+			subFilter.getItems().add(new MenuItem(Integer.toString(subFilterItem)));
+		}
+		return subFilter;
 	}
 }
