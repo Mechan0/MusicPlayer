@@ -36,15 +36,15 @@ public class AccountScenes {
             }
         });
         userAccounts.setItems(users);
-        VBox userAccountLayout = new VBox(20);
-        userAccountLayout.setPadding(new Insets(10));
+        VBox userAccountLayout = new VBox(10);
+        userAccountLayout.setPadding(MusicPlayer.DEFAULT_PADDING);
         userAccountLayout.getChildren().addAll(new Label("Users: "), userAccounts, loadUser, newUser);
         return new Scene(userAccountLayout, 200, 200);
     }
     public static Scene createAccount() {
         //Creating a GridPane container
         GridPane newAccLayout = new GridPane();
-        newAccLayout.setPadding(new Insets(10));
+        newAccLayout.setPadding(MusicPlayer.DEFAULT_PADDING);
         newAccLayout.setVgap(5);
         newAccLayout.setHgap(5);
 

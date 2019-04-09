@@ -4,6 +4,7 @@ import com.sun.istack.internal.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Represents a user account, storing their PlayLists and other information
@@ -11,11 +12,12 @@ import java.util.HashMap;
  * @author James Williamson, Alexander Yaroslavtsev
  */
 public class Account {
-	private final HashMap<String, Playlist> playLists = new HashMap<>();
+	private final HashMap<String, Playlist> playLists = new LinkedHashMap<>();
 	private final boolean admin;
 
 	public Account(boolean admin) {
 		this.admin = admin;
+		createPlayList("Sample Playlist");
 	}
 
 	public boolean isAdmin() {

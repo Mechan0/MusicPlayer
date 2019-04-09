@@ -13,7 +13,7 @@ public class AccountDatabase {
 	private static final HashMap<String, Account> userAccounts = new LinkedHashMap<>(); // retain key ordering
 
 	static {
-		
+		userAccounts.put("Sample User", new Account(false));
 	}
 
 	public static void addUser(String userName, boolean admin) {

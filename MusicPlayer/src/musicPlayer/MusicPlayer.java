@@ -1,6 +1,7 @@
 package musicPlayer;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import musicPlayer.scenes.AccountScenes;
@@ -10,6 +11,7 @@ import musicPlayer.scenes.AccountScenes;
  *
  */
 public class MusicPlayer extends Application {
+	public static final Insets DEFAULT_PADDING = new Insets(10);
 	private static Stage window;
 	private static double width = 200, height = 300; // default dimensions
 	private static Account activeAccount;

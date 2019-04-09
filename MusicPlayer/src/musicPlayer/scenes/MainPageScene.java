@@ -1,16 +1,13 @@
 package musicPlayer.scenes;
 
+import javafx.collections.ListChangeListener;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import musicPlayer.Song;
-import musicPlayer.SongDatabase;
-import musicPlayer.SongTableFactory;
+import musicPlayer.*;
 
 import java.util.ArrayList;
 
@@ -21,15 +18,42 @@ public class MainPageScene {
     public static Scene getScene() {
         //TODO: Flesh out main panel, add buttons to toolbar
         BorderPane mainLayout = new BorderPane();
-        VBox centerContent = new VBox();
+        //VBox centerContent = new VBox();
         TableView<Song> songTable = SongTableFactory.createSongTable(SongDatabase.getSongs());
-        centerContent.getChildren().add(songTable);
+        //centerContent.getChildren().add(songTable);
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(createFilterMenu(songTable));
         HBox statusbar = new HBox();
+        statusbar.setSpacing(10);
+        statusbar.setPadding(MusicPlayer.DEFAULT_PADDING);
+
+        Button playlistsButton = new Button("Playlists");
+        playlistsButton.setOnAction(e -> MusicPlayer.setScene(PlaylistScenes.playlistsScene()));
+        statusbar.getChildren().add(playlistsButton);
+
+        Button createPlaylistButton = new Button("Create New Playlist");
+        createPlaylistButton.setOnAction(e -> MusicPlayer.setScene(PlaylistScenes.createPlaylist()));
+        statusbar.getChildren().add(createPlaylistButton);
+
+        MenuButton addToPlaylistButton = new MenuButton("Add to Playlist");
+        addToPlaylistButton.setDisable(true);
+        for (Playlist playlist: MusicPlayer.getActiveAccount().getPlaylists()) {
+            MenuItem playlistButton = new MenuItem(playlist.getTitle());
+            playlistButton.setOnAction(e -> {
+                songTable.getSelectionModel().getSelectedItems().forEach(playlist::addSong);
+            });
+            addToPlaylistButton.getItems().add(playlistButton);
+        }
+        statusbar.getChildren().add(addToPlaylistButton);
+
+        songTable.getSelectionModel().getSelectedCells().addListener((ListChangeListener<? super TablePosition>) change -> {
+            change.next();
+            addToPlaylistButton.setDisable(change.getTo() == 0);
+        });
+
 
         mainLayout.setTop(menuBar);
-        mainLayout.setCenter(centerContent);
+        mainLayout.setCenter(songTable);
         mainLayout.setBottom(statusbar);
         return new Scene(mainLayout);
     }
