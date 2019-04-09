@@ -1,8 +1,10 @@
 package musicPlayer;
 
+
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-
+import javafx.scene.control.Button;
 /**
  * Represents a single song within the system and stores it's attributes
  * Implements Comparable 
@@ -13,6 +15,7 @@ public class Song implements Comparable<Song> {
 	private final int id;
 	private SimpleIntegerProperty songNumber, year;
 	private SimpleStringProperty title, artist, album, genre, length;
+	private Button button;
 	
 	public Song(int id, String title, String artist, String album, int songNumber, int year, String genre, String length) {
 		this.id = id;
@@ -22,6 +25,12 @@ public class Song implements Comparable<Song> {
 		this.songNumber = new SimpleIntegerProperty(songNumber);
 		this.year = new SimpleIntegerProperty(year);
 		this.genre = new SimpleStringProperty(genre);
+		this.button = new Button("Statistics");
+		button.setOnAction(e -> StatsPage.display(getStats()));
+	}
+	public String getStats() {
+		return this.getTitle()+"\t\t"+this.getArtist()+"\t\t"+this.getAlbum()+"\t\t"
+			   +this.getSongNumber()+"\t\t"+this.getGenre()+"\t\t"+this.getYear();
 	}
 	public int getId() {
 		return id;
@@ -62,5 +71,12 @@ public class Song implements Comparable<Song> {
 	@Override
 	public int compareTo(Song o) {
 		return getTitle().compareTo(o.getTitle());
+	}
+	//Branden
+	public void setButton(Button button) {
+		this.button = button;
+	}
+	public Button getButton() {
+		return button;
 	}
 }

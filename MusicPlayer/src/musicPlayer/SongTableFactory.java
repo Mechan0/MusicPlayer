@@ -3,6 +3,7 @@ package musicPlayer;
 import java.util.Collection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class SongTableFactory {
 	@SuppressWarnings("unchecked")
 	public static TableView<Song> createSongTable(Collection<Song> songs) {
+	
 		TableView<Song> songTable = new TableView<Song>();
 		// title
 		TableColumn<Song, String> title = new TableColumn<Song, String>("Title");
@@ -34,10 +36,13 @@ public class SongTableFactory {
 		// genre
 		TableColumn<Song, String> genre = new TableColumn<Song, String>("Genre");
 		genre.setCellValueFactory(new PropertyValueFactory<Song, String>("genre"));
+		//Stats
+		TableColumn<Song, String> stats = new TableColumn<Song, String>("Statistics");
+		stats.setCellValueFactory(new PropertyValueFactory<Song, String>("button"));
 		ObservableList<Song> data = FXCollections.observableArrayList();
 		data.addAll(songs);
 		songTable.setItems(data);
-		songTable.getColumns().addAll(title, artist, album, songNumber, genre, year);
+		songTable.getColumns().addAll(title, artist, album, songNumber, genre, year, stats);
 		return songTable;
 	}
 }
