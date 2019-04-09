@@ -11,7 +11,7 @@ import java.util.HashMap;
  * @author James Williamson, Alexander Yaroslavtsev
  */
 public class Account {
-	private final HashMap<String, PlayList> playLists = new HashMap<>();
+	private final HashMap<String, Playlist> playLists = new HashMap<>();
 	private final boolean admin;
 
 	public Account(boolean admin) {
@@ -23,15 +23,15 @@ public class Account {
 	}
 
 	public void createPlayList(String title) {
-		playLists.put(title, new PlayList(title));
+		playLists.put(title, new Playlist(title));
 	}
 
 	@Nullable
-	public PlayList getPlaylist(String title) {
+	public Playlist getPlaylist(String title) {
 		return playLists.get(title);
 	}
 
-	public Collection<PlayList> getPlaylists() {
+	public Collection<Playlist> getPlaylists() {
 		return Collections.unmodifiableCollection(playLists.values());
 	}
 
