@@ -2,6 +2,10 @@ package musicPlayer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * @author James Williamson, Alex Yaro
+ *
+ */
 public class MusicPlayer extends Application {
 	private Stage window;
 	private double width = 200, height = 300; // default dimensions

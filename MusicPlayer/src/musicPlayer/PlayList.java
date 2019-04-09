@@ -3,6 +3,10 @@ package musicPlayer;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * @author James Williamson
+ *
+ */
 public class PlayList {
 	private Queue<Song> songs;
 	public PlayList() {

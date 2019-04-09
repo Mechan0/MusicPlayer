@@ -1,23 +1,51 @@
 package musicPlayer;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * Represents a single song within the system and stores it's attributes
  * Implements Comparable 
  * 
- *
+ * @author James Williamson
  */
 public class Song implements Comparable<Song> {
-	int id, songNumber, year;
-	String title, artist, album, genre, length;
+	int id;
+	SimpleIntegerProperty songNumber, year;
+	SimpleStringProperty title, artist, album, genre, length;
 	
 	public Song(int id, String title, String artist, String album, int songNumber, int year, String genre, String length) {
 		this.id = id;
-		this.title = title;
-		this.artist = artist;
-		this.album = album;
-		this.songNumber = songNumber;
-		this.year = year;
-		this.genre = genre;
+		this.title = new SimpleStringProperty(title);
+		this.artist = new SimpleStringProperty(artist);
+		this.album = new SimpleStringProperty(album);
+		this.songNumber = new SimpleIntegerProperty(songNumber);
+		this.year = new SimpleIntegerProperty(year);
+		this.genre = new SimpleStringProperty(genre);
+	}
+	public int getId() {
+		return id;
+	}
+	public int getSongNumber() {
+		return songNumber.get();
+	}
+	public int getYear() {
+		return year.get();
+	}
+	public String getTitle() {
+		return title.get();
+	}
+	public String getArtist() {
+		return artist.get();
+	}
+	public String getAlbum() {
+		return album.get();
+	}
+	public String getGenre() {
+		return genre.get();
+	}
+	public String getLength() {
+		return length.get();
 	}
 	@Override
 	public int hashCode() {
@@ -33,6 +61,6 @@ public class Song implements Comparable<Song> {
 	}
 	@Override
 	public int compareTo(Song o) {
-		return title.compareTo(o.title);
+		return getTitle().compareTo(o.getTitle());
 	}
 }

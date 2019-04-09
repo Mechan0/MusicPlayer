@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Represents a user account, storing their PlayLists and other information
  * 
- *
+ * @author James Williamson
  */
 public class Account {
 	private HashMap<String, PlayList> playLists;

@@ -6,6 +6,7 @@ import java.util.HashMap;
 /**
  * A database of all existing user accounts within the system
  *
+ * @author James Williamson
  */
 public class AccountDatabase {
 	private HashMap<String, Account> userAccounts;

@@ -8,14 +8,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * @author James Williamson, Alex Yaro
+ *
+ */
 public class Interface {
 	private final Stage window;
-	private Scene userAccountSelectScene, newUserAccountScene, userAccountScene;
+	private Scene userAccountSelectScene, newUserAccountScene, mainMenuScene;
 	private SongDatabase songDatabase;
 	private AccountDatabase accounts;
 	private Account activeAccount;
@@ -27,6 +35,7 @@ public class Interface {
 		// 1: user account scene
 		newUserAccountScene = createNewUserAccountScene();
 		userAccountSelectScene = createUserAccountSelectScene();
+		mainMenuScene = createMainMenuScene();
 		window.setScene(userAccountSelectScene);
 		window.show();
 	}
@@ -40,8 +49,10 @@ public class Interface {
 		newUser.setOnAction(e -> window.setScene(newUserAccountScene));
 		Button loadUser = new Button("Login as user");
 		loadUser.setOnAction(e -> {
-			activeAccount = accounts.getAccount(userAccounts.getSelectionModel().getSelectedItem());
-			//TODO: Add new main menu panel and load it here
+			// must have an account selected to log in
+			if((activeAccount = accounts.getAccount(userAccounts.getSelectionModel().getSelectedItem())) != null) {
+				window.setScene(mainMenuScene);
+			}
 		});
 		userAccounts.setItems(users);
 		VBox userAccountLayout = new VBox(20);
@@ -78,6 +89,20 @@ public class Interface {
 		GridPane.setConstraints(returnButton, 0, 1);
 		newAccLayout.getChildren().add(returnButton);
 		
-		return new Scene(newAccLayout, 200, 200);
+		return new Scene(newAccLayout, 300, 100);
+	}
+	private Scene createMainMenuScene() {
+		//TODO: Flesh out main panel, add buttons to toolbar
+		BorderPane mainLayout = new BorderPane();
+		ToolBar toolbar = new ToolBar();
+		VBox centerContent = new VBox();
+	    HBox statusbar = new HBox(); 
+	    SongTableFactory stf = new SongTableFactory();
+	    TableView<Song> songTable = stf.createSongTable(songDatabase.songs);
+	    centerContent.getChildren().add(songTable);
+	    mainLayout.setTop(toolbar);
+	    mainLayout.setCenter(centerContent);
+	    mainLayout.setBottom(statusbar);
+	    return new Scene(mainLayout);
 	}
 }
