@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a database of all songs, from which users can read entries. Reads
@@ -25,7 +26,13 @@ public class SongDatabase {
 	}
 
 	public static List<Song> getSongs() {
-		return Collections.unmodifiableList(songs);
+		return getSongs(false);
+	}
+
+	public static List<Song> getSongs(boolean includeRestricted) {
+		return includeRestricted ?
+				Collections.unmodifiableList(songs) :
+				songs.stream().filter(song -> !song.isRestricted()).collect(Collectors.toList());
 	}
 
 	public static Song getSong(int songID) {

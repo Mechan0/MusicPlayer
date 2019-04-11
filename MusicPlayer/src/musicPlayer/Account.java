@@ -1,6 +1,7 @@
 package musicPlayer;
 
 import com.sun.istack.internal.Nullable;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.LinkedHashMap;
 public class Account {
 	private final HashMap<String, Playlist> playLists = new LinkedHashMap<>();
 	private final boolean admin;
+	private final SongQueue songQueue = new SongQueue();
 
 	public Account(boolean admin) {
 		this.admin = admin;
@@ -22,6 +24,12 @@ public class Account {
 
 	public boolean isAdmin() {
 		return admin;
+	}
+
+	public void removeRestricted() {
+		if (admin) return;
+		playLists.values().forEach(playlist -> playlist.getSongs().removeIf(Song::isRestricted));
+		songQueue.removeIf(Song::isRestricted);
 	}
 
 	public void createPlayList(String title) {
@@ -43,5 +51,8 @@ public class Account {
 
 	public boolean removePlaylist(Playlist playlist) {
 		return playLists.remove(playlist.getTitle(), playlist);
+	}
+	public SongQueue getSongQueue() {
+		return songQueue;
 	}
 }

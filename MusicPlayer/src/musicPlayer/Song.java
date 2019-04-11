@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
  * Represents a single song within the system and stores it's attributes
  * Implements Comparable 
  * 
- * @author James Williamson
+ * @author James Williamson, Alexander Yaroslavtsev
  */
 public class Song implements Comparable<Song> {
 	private final int id;
@@ -17,6 +17,7 @@ public class Song implements Comparable<Song> {
 	private SimpleStringProperty title, artist, album, genre;
 	private final int durationSeconds;
 	private Button button;
+	private boolean restricted;
 	
 	public Song(int id, String title, String artist, String album, int songNumber, int year, String genre, int durationSeconds) {
 		this.id = id;
@@ -94,5 +95,13 @@ public class Song implements Comparable<Song> {
 	}
 	public Button getButton() {
 		return button;
+	}
+
+	public boolean isRestricted() {
+		return restricted;
+	}
+
+	public void setRestricted(boolean restricted) {
+		this.restricted = restricted;
 	}
 }

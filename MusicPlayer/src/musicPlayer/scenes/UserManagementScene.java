@@ -2,6 +2,9 @@ package musicPlayer.scenes;
 
 import javafx.scene.Scene;
 
+/**
+ * @author Alexander Yaroslavtsev
+ */
 public class UserManagementScene {
 	public static Scene getScene() {
 		// this scene must list users

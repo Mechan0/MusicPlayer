@@ -13,7 +13,7 @@ import java.util.Collection;
 
 /**
  * Generates TableView objects containing the given Collection of Song objects
- * @author James Williamson
+ * @author James Williamson, Alexander Yaroslavtsev
  *
  */
 public class SongTableFactory {

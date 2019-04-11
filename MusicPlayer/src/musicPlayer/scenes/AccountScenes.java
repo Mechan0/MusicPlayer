@@ -3,7 +3,10 @@ package musicPlayer.scenes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import musicPlayer.Account;
@@ -14,7 +17,7 @@ import java.util.Comparator;
 
 /**
  * Account-related scene factory class.
- * @author Alex Yaroslavtsev, James Williamson
+ * @author Alexander Yaroslavtsev, James Williamson
  */
 public class AccountScenes {
     public static Scene selectAccount() {
@@ -31,6 +34,7 @@ public class AccountScenes {
             Account account = AccountDatabase.getAccount(userAccounts.getSelectionModel().getSelectedItem());
             if (account != null) {
                 MusicPlayer.setActiveAccount(account);
+                account.removeRestricted();
                 MusicPlayer.setScene(MainPageScene.getScene());
             }
         });

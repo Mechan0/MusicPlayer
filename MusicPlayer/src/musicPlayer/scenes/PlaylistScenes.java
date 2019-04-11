@@ -17,6 +17,9 @@ import musicPlayer.SongTableFactory;
 
 import java.util.function.Supplier;
 
+/**
+ * @author Alexander Yaroslavtsev
+ */
 public class PlaylistScenes {
 	public static void createPlaylistDialog() {
 		Stage window = new Stage();
@@ -126,7 +129,13 @@ public class PlaylistScenes {
 		});
 
 		Button addToQueue = new Button("Add Playlist to Queue"); // TODO add to queue only if between 1-3 hrs
-		addToQueue.setDisable(true);
+		//addToQueue.setDisable(!playlist.getSongs().isDurationBetween1And3Hours());
+		addToQueue.setOnAction(e -> {
+			//if (playlist.getSongs().isDurationBetween1And3Hours()) {
+				MusicPlayer.getActiveAccount().getSongQueue().addAll(playlist.getSongs());
+				MusicPlayer.setScene(MainPageScene.getScene());
+			//}
+		});
 
 		Button backButton = new Button("Go Back");
 		backButton.setOnAction(e -> MusicPlayer.setScene(previousScene.get()));
