@@ -128,10 +128,20 @@ public class MainPageScene {
 		statusbar.getChildren().add(createPlaylistButton);
 
 		if (MusicPlayer.getActiveAccount().isAdmin()) {
+			
+			
 			Button button = new Button("Edit Restricted Songs");
 			button.setStyle("-fx-background-color: #ffd6d6;");
 			button.setOnAction(e -> MusicPlayer.setScene(RestrictedSongsScene.getScene()));
 			statusbar.getChildren().add(button);
+			
+			//Here
+			Button userPermsButton = new Button("User Permissions");
+			userPermsButton.setOnAction(e -> MusicPlayer.setScene(UserManagementScene.getScene()));
+			statusbar.getChildren().add(userPermsButton);
+			
+			
+			
 		}
 
 		Button switchAccountButton = new Button("Switch Account");

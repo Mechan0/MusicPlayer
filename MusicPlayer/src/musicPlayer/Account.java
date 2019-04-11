@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
  */
 public class Account {
 	private final HashMap<String, Playlist> playLists = new LinkedHashMap<>();
-	private final boolean admin;
+	private boolean admin;
 	private final SongQueue songQueue = new SongQueue();
 
 	public Account(boolean admin) {
@@ -31,7 +31,20 @@ public class Account {
 		playLists.values().forEach(playlist -> playlist.getSongs().removeIf(Song::isRestricted));
 		songQueue.removeIf(Song::isRestricted);
 	}
+	
+	public void changePermissions() {
+		
+		admin = !admin;
+		
+	}
 
+	public void promoteUser(Account user){
+		
+		if(user.isAdmin()) 
+			{user.changePermissions();}
+		
+	}
+	
 	public void createPlayList(String title) {
 		playLists.put(title, new Playlist(title));
 	}
