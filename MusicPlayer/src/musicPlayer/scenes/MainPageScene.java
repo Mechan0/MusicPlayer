@@ -20,7 +20,7 @@ public class MainPageScene {
 		//TODO: Flesh out main panel, add buttons to toolbar
 		BorderPane mainLayout = new BorderPane();
 		//VBox centerContent = new VBox();
-		TableView<Song> songTable = SongTableFactory.createSongTable(SongDatabase.getSongs(MusicPlayer.getActiveAccount().isAdmin()));
+		TableView<Song> songTable = SongTableFactory.createSongTable(SongDatabase.getSongs(false));
 		songTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); // allow multiple selection
 		//centerContent.getChildren().add(songTable);
 		MenuBar menuBar = new MenuBar();

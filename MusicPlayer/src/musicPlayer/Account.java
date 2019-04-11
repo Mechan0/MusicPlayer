@@ -27,7 +27,7 @@ public class Account {
 	}
 
 	public void removeRestricted() {
-		if (admin) return;
+		//if (admin) return;
 		playLists.values().forEach(playlist -> playlist.getSongs().removeIf(Song::isRestricted));
 		songQueue.removeIf(Song::isRestricted);
 	}

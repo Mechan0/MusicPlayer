@@ -1,22 +1,16 @@
 package musicPlayer.scenes;
 
-import java.util.Comparator;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import musicPlayer.Account;
 import musicPlayer.AccountDatabase;
 import musicPlayer.MusicPlayer;
 
-/**
- * @author Alexander Yaroslavtsev
- */
+import java.util.Comparator;
+
 public class UserManagementScene {
 		
 	public static Scene getScene() {
