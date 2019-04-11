@@ -2,6 +2,7 @@ package musicPlayer;
 
 import com.sun.istack.internal.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,12 +11,13 @@ import java.util.LinkedHashMap;
 /**
  * Represents a user account, storing their PlayLists and other information
  * 
- * @author James Williamson, Alexander Yaroslavtsev
+ * @author Tony Vu, James Williamson, Alexander Yaroslavtsev
  */
 public class Account {
 	private final HashMap<String, Playlist> playLists = new LinkedHashMap<>();
 	private boolean admin;
 	private final SongQueue songQueue = new SongQueue();
+	private ArrayList<Song> recentlyPlayed = new ArrayList<Song>();
 
 	public Account(boolean admin) {
 		this.admin = admin;
@@ -67,5 +69,11 @@ public class Account {
 	}
 	public SongQueue getSongQueue() {
 		return songQueue;
+	}
+	public void addRecentlyPlayed(Song song) {
+		recentlyPlayed.add(song);
+	}
+	public ArrayList<Song> getRecentlyPlayed() {
+		return recentlyPlayed;
 	}
 }
