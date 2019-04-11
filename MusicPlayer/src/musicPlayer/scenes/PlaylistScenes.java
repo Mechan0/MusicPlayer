@@ -95,6 +95,12 @@ public class PlaylistScenes {
 		});
 		buttonBox.getChildren().add(createButton);
 
+		Button recentButton = new Button("Recently Played");
+		recentButton.setOnAction(e -> {
+			
+		});
+		buttonBox.getChildren().add(recentButton);
+		
 		Button backButton = new Button("Back to Songs");
 		backButton.setOnAction(e -> MusicPlayer.setScene(MainPageScene.getScene()));
 		buttonBox.getChildren().add(backButton);
