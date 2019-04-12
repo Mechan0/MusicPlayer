@@ -2,6 +2,7 @@ package musicPlayer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class SongDatabase {
 	private static void load() {
 		BufferedReader reader;
 		try {
-			reader = new BufferedReader(new FileReader("songs.csv"));
+			reader = new BufferedReader(new InputStreamReader(MusicPlayer.class.getResourceAsStream("/songs.csv")));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				if (!line.startsWith("#")) { // skip comments

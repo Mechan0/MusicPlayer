@@ -23,6 +23,7 @@ public class RestrictedSongsScene {
 		TableView<Song> songTable = SongTableFactory.createSongTable(SongDatabase.getSongs(true));
 		songTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		//Callback<TableView<Song>, TableRow<Song>> rowFactory = songTable.getRowFactory();
+		// FIXME random rows highlighted for unrelated rows (why do row factories have to be so convoluted?)
 		songTable.setRowFactory(param -> {
 			//TableRow tableRow = rowFactory.call(param);
 			return new TableRow<Song>() {
@@ -43,7 +44,10 @@ public class RestrictedSongsScene {
 		restrictButton.setDisable(true);
 
 		Consumer<Boolean> updateTask = restrict -> {
-			songTable.getSelectionModel().getSelectedItems().forEach(song -> song.setRestricted(restrict));
+			songTable.getSelectionModel().getSelectedItems().forEach(song -> {
+				System.out.println(song);
+				song.setRestricted(restrict);
+			});
 			songTable.getSelectionModel().clearSelection();
 			MusicPlayer.setScene(getScene());
 		};

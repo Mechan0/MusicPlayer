@@ -11,6 +11,9 @@ import musicPlayer.MusicPlayer;
 
 import java.util.Comparator;
 
+/**
+ * @author Alexander Yaroslavtsev, Daniel Alessi
+ */
 public class UserManagementScene {
 		
 	public static Scene getScene() { 
@@ -23,14 +26,14 @@ public class UserManagementScene {
 	    users.sort(Comparator.naturalOrder());	     
 	    userAccounts.setItems(users);
 		
-	    Button changePerms = new Button("change Permissions");
+	    Button changePerms = new Button("Toggle Admin Status");
 		changePerms.setOnAction(e -> { 
 			AccountDatabase.getAccount(userAccounts.getSelectionModel().getSelectedItem()).changePermissions();			
 		});    
 		
 	    VBox userAccountLayout = new VBox(10);
 	    userAccountLayout.setPadding(MusicPlayer.DEFAULT_PADDING);
-	    userAccountLayout.getChildren().addAll(MusicPlayer.createTitle("Select an Account"), userAccounts, changePerms, Return);
+	    userAccountLayout.getChildren().addAll(MusicPlayer.createTitle("User Management"), userAccounts, changePerms, Return);
 	    return new Scene(userAccountLayout, 200, 200);
 	}
 }
