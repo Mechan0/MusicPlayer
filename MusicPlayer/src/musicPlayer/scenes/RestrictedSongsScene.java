@@ -45,7 +45,7 @@ public class RestrictedSongsScene {
 
 		Consumer<Boolean> updateTask = restrict -> {
 			songTable.getSelectionModel().getSelectedItems().forEach(song -> {
-				System.out.println(song);
+				//System.out.println(song);
 				song.setRestricted(restrict);
 			});
 			songTable.getSelectionModel().clearSelection();
