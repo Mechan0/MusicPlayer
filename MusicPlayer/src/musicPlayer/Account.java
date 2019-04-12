@@ -73,7 +73,4 @@ public class Account {
 	public void addRecentlyPlayed(Song song) {
 		recentlyPlayed.add(song);
 	}
-	public ArrayList<Song> getRecentlyPlayed() {
-		return recentlyPlayed;
-	}
 }

@@ -18,7 +18,7 @@ import musicPlayer.SongTableFactory;
 import java.util.function.Supplier;
 
 /**
- * @author Alexander Yaroslavtsev
+ * @author Tony Vu, Alexander Yaroslavtsev
  */
 public class PlaylistScenes {
 	public static void createPlaylistDialog() {
@@ -57,6 +57,26 @@ public class PlaylistScenes {
 		window.showAndWait();
 	}
 
+	public static void displayRecentlyPlayed() {
+		Stage window = new Stage();
+		window.initModality(Modality.APPLICATION_MODAL);
+		window.setTitle("Recently Played");
+
+		VBox layout = new VBox();
+		layout.setSpacing(100);
+		layout.setPadding(MusicPlayer.DEFAULT_PADDING);
+		layout.getChildren().add(MusicPlayer.createTitle("Recently Played"));
+
+		HBox buttons = new HBox();
+		Button closeButton = new Button("Close");
+		closeButton.setOnAction(e -> window.close());
+		buttons.getChildren().add(closeButton);
+
+		layout.getChildren().add(buttons);
+
+		window.setScene(new Scene(layout));
+		window.showAndWait();
+	}
 	public static Scene playlistsScene() {
 		GridPane gridPane = new GridPane();
 		gridPane.setPadding(MusicPlayer.DEFAULT_PADDING);
@@ -97,6 +117,8 @@ public class PlaylistScenes {
 
 		Button recentButton = new Button("Recently Played");
 		recentButton.setOnAction(e -> {
+			displayRecentlyPlayed();
+			MusicPlayer.setScene(playlistsScene());
 			
 		});
 		buttonBox.getChildren().add(recentButton);
@@ -138,6 +160,7 @@ public class PlaylistScenes {
 		//addToQueue.setDisable(!playlist.getSongs().isDurationBetween1And3Hours());
 		addToQueue.setOnAction(e -> {
 			//if (playlist.getSongs().isDurationBetween1And3Hours()) {
+				
 				MusicPlayer.getActiveAccount().getSongQueue().addAll(playlist.getSongs());
 				MusicPlayer.setScene(MainPageScene.getScene());
 			//}
