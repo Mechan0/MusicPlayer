@@ -50,7 +50,7 @@ public class PlaylistScenes {
 		cancelButton.setOnAction(e -> window.close()/*MusicPlayer.setScene(returnScene.get())*/);
 		buttons.getChildren().add(createButton);
 		buttons.getChildren().add(cancelButton);
-
+		
 		layout.getChildren().add(buttons);
 
 		window.setScene(new Scene(layout));
@@ -71,9 +71,15 @@ public class PlaylistScenes {
 		Button closeButton = new Button("Close");
 		closeButton.setOnAction(e -> window.close());
 		buttons.getChildren().add(closeButton);
-
+		/*
+		ListView<String> list = new ListView<>();
+        ObservableList<String> songLists = FXCollections.observableArrayList();
+        songLists.add(MusicPlayer.getActiveAccount().getRecentlyPlayed());
+        list.setItems(songLists);
+		layout.getChildren().add(list);
+		*/
 		layout.getChildren().add(buttons);
-
+		
 		window.setScene(new Scene(layout));
 		window.showAndWait();
 	}
