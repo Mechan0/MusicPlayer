@@ -91,7 +91,7 @@ public class MainPageScene {
 			List<Integer> indices = new ArrayList<>(queueTable.getSelectionModel().getSelectedIndices());
 			indices.sort((a, b) -> b-a); // sort descending
 			for (int i: indices) {
-				MusicPlayer.getActiveAccount().getSongQueue().remove(i);
+				MusicPlayer.getActiveAccount().addRecentlyPlayed(MusicPlayer.getActiveAccount().getSongQueue().remove(i));
 			}
 			queueTable.getSelectionModel().clearSelection();
 			MusicPlayer.setScene(MainPageScene.getScene());

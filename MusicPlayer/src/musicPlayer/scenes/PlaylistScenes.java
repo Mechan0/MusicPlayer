@@ -18,7 +18,7 @@ import musicPlayer.SongTableFactory;
 import java.util.function.Supplier;
 
 /**
- * @author Tony Vu, Alexander Yaroslavtsev
+ * @author Alexander Yaroslavtsev, Tony Vu
  */
 public class PlaylistScenes {
 	public static void createPlaylistDialog() {
@@ -66,7 +66,7 @@ public class PlaylistScenes {
 		layout.setSpacing(100);
 		layout.setPadding(MusicPlayer.DEFAULT_PADDING);
 		layout.getChildren().add(MusicPlayer.createTitle("Recently Played"));
-
+		
 		HBox buttons = new HBox();
 		Button closeButton = new Button("Close");
 		closeButton.setOnAction(e -> window.close());

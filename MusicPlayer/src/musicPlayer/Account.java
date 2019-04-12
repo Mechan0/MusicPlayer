@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 /**
  * Represents a user account, storing their PlayLists and other information
  * 
- * @author Tony Vu, James Williamson, Alexander Yaroslavtsev
+ * @author James Williamson, Alexander Yaroslavtsev, Tony Vu
  */
 public class Account {
 	private final HashMap<String, Playlist> playLists = new LinkedHashMap<>();
